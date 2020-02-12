@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style>
+        body { margin: 50px; }
+        th, td { border: 1px solid black; padding: 5px; }
+        img { max-width: 300px; }
+
+        /* Just so that everyone is able to see :) */
+        body, th, td, a { font-size: 1.5em; }
+    </style>
+    <title>Welcome</title>
+</head>
+<body>
+Welcome to this amazing peanutbutter webshop!<br>
+<br>
+The list of currently available types of peanutbutter:<br>
+<br>
+<table>
+    <tr>
+        <th>Picture</th>
+        <th>Brand</th>
+        <th>Price</th>
+        <th></th>
+    </tr>
+    {% for p in peanutbutter %}
+        <tr>
+            <td>
+                <img src="{{ p.picture_address }}" alt="{{ p.brand }}">
+            </td>
+            <td>
+                {{ p.brand }}
+            </td>
+            <td>
+                &euro; {{ p.price|floatformat:2 }}
+            </td>
+            <td>
+                <a href="{% url 'edit' p.id %}" class="btn btn-success">edit</a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+<br>
+<a href="{% url 'new' %}" class="btn btn-primary">Add a new type of peanutbutter</a>
+</body>
+</html>
